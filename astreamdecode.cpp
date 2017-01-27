@@ -162,7 +162,7 @@ void aStreamDecodeThread (uv_work_t * req) {
                     pStreamDecode->previewBufferSize = OutPacket.size;
                     uv_mutex_unlock(&pStreamDecode->previewBufferMutex);
                   }
-                  av_free_packet(&OutPacket);
+                  av_packet_unref(&OutPacket);
                 }
 
                 if (pStreamDecode->isNeedVideo) {
@@ -179,7 +179,7 @@ void aStreamDecodeThread (uv_work_t * req) {
                         pStreamDecode->videoBufferSize = OutVideoPacket.size;
                         uv_mutex_unlock(&pStreamDecode->videoBufferMutex);
                     }
-                    av_free_packet(&OutVideoPacket);
+                    av_packet_unref(&OutVideoPacket);
                 }
             }
         }
